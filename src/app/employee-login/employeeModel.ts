@@ -1,6 +1,6 @@
 export class EmployeeModel {
     name: string;
-    newa: Date;
+    currentDate: Date;
     timeLeft = [];
     interval;
     timeDifference: number;
