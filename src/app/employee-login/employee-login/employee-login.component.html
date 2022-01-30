@@ -1,0 +1,100 @@
+<div class="center">
+  <form [formGroup]="addvendor" (ngSubmit)="addEmployeeName(addvendor)">
+    <input
+      type="text"
+      class="form-control"
+      formControlName="name"
+      placeholder="Name"
+      style="width: 50%"
+    />
+  </form>
+  <div
+    *ngIf="
+      this.EmployeeModel &&
+      this.EmployeeModel.name &&
+      this.EmployeeModel.name.length !== 0
+    "
+    class="actionButton"
+  >
+    <button (click)="startTimer()" class="btn btn-primary" style="margin-right: 10px">Sign In</button>
+    <button
+      (click)="pauseTimer()"
+      *ngIf="
+        this.EmployeeModel &&
+        this.EmployeeModel.timeLeft &&
+        this.EmployeeModel.timeLeft.length !== 0
+      "
+      class="btn btn-danger"
+    >
+      Sign Out
+    </button>
+  </div>
+  <div class="time">
+    <p
+      *ngIf="
+        this.EmployeeModel &&
+        this.EmployeeModel.timeLeft &&
+        this.EmployeeModel.timeLeft.length !== 0 &&
+        this.EmployeeModel.timeLeft[0] !== 0
+      "
+    >
+      <em>{{ this.EmployeeModel.timeLeft[0] }}</em
+      ><b> Hours</b>
+    </p>
+    <p
+      *ngIf="
+        this.EmployeeModel &&
+        this.EmployeeModel.timeLeft &&
+        this.EmployeeModel.timeLeft.length !== 0 &&
+        this.EmployeeModel.timeLeft[1] !== 0
+      "
+      style="margin-left: 10px"
+    >
+      <em>{{ this.EmployeeModel.timeLeft[1] }}</em
+      ><b> Minutes</b>
+    </p>
+    <p
+      *ngIf="
+        this.EmployeeModel &&
+        this.EmployeeModel.timeLeft &&
+        this.EmployeeModel.timeLeft.length !== 0 &&
+        this.EmployeeModel.timeLeft[2] !== 0
+      "
+      style="margin-left: 10px"
+    >
+      <em>{{ this.EmployeeModel.timeLeft[2] }}</em
+      ><b> Seconds</b>
+    </p>
+  </div>
+  <button
+    (click)="addData(addvendor)"
+    *ngIf="
+      this.EmployeeModel &&
+      this.EmployeeModel.showSendDataButton &&
+      this.EmployeeModel.showSendDataButton === true
+    "
+    class="btn btn-success"
+  >
+    Send data
+  </button>
+</div>
+
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Actor Name</th>
+        <th>Character Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let character of this.EmployeeModel.showData">
+        <td>{{ character.name }}</td>
+        <td>
+          {{ character.time[0] }} Hours {{ character.time[1] }} Minutes
+          {{ character.time[2] }} Seconds
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
